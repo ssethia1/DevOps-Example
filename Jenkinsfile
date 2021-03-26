@@ -9,6 +9,8 @@ node {
  
     def dockerImageTag = "devopsexample${env.BUILD_NUMBER}"
     
+    def dockerhub1 = 'dockerhub'
+    
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
       //git 'https://github.com/felipemeriga/DevOps-Example.git'
@@ -42,7 +44,7 @@ node {
 	  sh "docker run --name devopsexample -d -p 2222:2222 devopsexample:${env.BUILD_NUMBER}"
 	  
 	  // docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-	  docker.withRegistry('https://hub.docker.com/repository/docker/sumitsethia1/devops_example', 'dockerhub') {
+	  docker.withRegistry('https://hub.docker.com/repository/docker/sumitsethia1/devops_example', dockerhub1 ) {
           dockerImage.push("${env.BUILD_NUMBER}")
           dockerImage.push("latest")
         }
