@@ -42,9 +42,10 @@ node {
 	  sh "docker run --name devopsexample -d -p 2222:2222 devopsexample:${env.BUILD_NUMBER}"
 	  
 	  // docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-      //    dockerImage.push("${env.BUILD_NUMBER}")
-      //      dockerImage.push("latest")
-      //  }
+	  docker.withRegistry('https://hub.docker.com/repository/docker/sumitsethia1/devops_example', 'dockerhub') {
+          dockerImage.push("${env.BUILD_NUMBER}")
+          dockerImage.push("latest")
+        }
       
     }
 }
